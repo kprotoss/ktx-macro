@@ -1,4 +1,5 @@
 let uid = 1;
+
 const MAIN_URI = "https://www.letskorail.com/ebizprd/EbizPrdTicketPr21111_i1.do";
 const LOGIN_PAGE_URI = "https://www.letskorail.com/korail/com/login.do";
 
@@ -88,7 +89,7 @@ const macroStart = () => {
   );
 
   localStorage.setItem("macro", "on");
-
+ 
   reload();
 };
 
@@ -167,6 +168,13 @@ const macro = () => {
 };
 
 const reload = () => {
+  const isStarted = localStorage.getItem("macro") === "on";
+  if (isStarted) {
+    var s = document.createElement("script");
+    s.innerHTML = "window.confirm = function (e) { return true; };";
+    document.body.appendChild(s);
+  }
+
   document.querySelector(".btn_inq > a").click();
 };
 
